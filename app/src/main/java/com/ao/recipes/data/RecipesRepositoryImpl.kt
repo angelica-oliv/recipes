@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.example.recipes.data
+package com.ao.recipes.data
 
-import androidx.annotation.DrawableRes
+import com.ao.recipes.data.local.LocalRecipesDataProvider
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-/**
- * A simple data class to represent a Recipe.
- */
-data class Recipe(
-    val id: Long,
-    val name: String,
-    val description: String = "",
-    val ingredients: String = "",
-    val steps: String = "",
-    var link: String = "",
-    @DrawableRes val picture: Int,
-    var isStarred: Boolean = false,
-    var type: RecipeType = RecipeType.MAIN_COURSE,
-)
+class RecipesRepositoryImpl : RecipesRepository {
+
+    override fun getAllRecipes(): Flow<List<Recipe>> = flow {
+        emit(LocalRecipesDataProvider.allRecipes)
+    }
+
+    override fun getRecipeFromId(id: Long): Flow<Recipe?> = flow {
+        LocalRecipesDataProvider.allRecipes.firstOrNull { it.id == id }
+    }
+}

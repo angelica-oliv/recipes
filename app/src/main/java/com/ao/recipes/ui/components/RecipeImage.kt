@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui.components
+package com.ao.recipes.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size

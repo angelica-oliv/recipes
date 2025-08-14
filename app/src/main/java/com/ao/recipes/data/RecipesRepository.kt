@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui.theme
+package com.ao.recipes.data
 
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Shapes
-import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.Flow
 
-val shapes = Shapes(
-    extraSmall = RoundedCornerShape(4.dp),
-    small = RoundedCornerShape(8.dp),
-    medium = RoundedCornerShape(16.dp),
-    large = RoundedCornerShape(24.dp),
-    extraLarge = RoundedCornerShape(32.dp)
-)
+/**
+ * An Interface contract to get all recipes info for a User.
+ */
+interface RecipesRepository {
+    fun getAllRecipes(): Flow<List<Recipe>>
+    fun getRecipeFromId(id: Long): Flow<Recipe?>
+}

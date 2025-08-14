@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui
+package com.ao.recipes.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -30,8 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.recipes.data.local.LocalRecipesDataProvider
-import com.example.recipes.ui.theme.ContrastAwareRecipeTheme
+import com.ao.recipes.data.local.LocalRecipesDataProvider
+import com.ao.recipes.ui.theme.ContrastAwareRecipeTheme
 import com.google.accompanist.adaptive.calculateDisplayFeatures
 
 class MainActivity : ComponentActivity() {

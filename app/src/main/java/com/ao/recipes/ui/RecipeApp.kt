@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui
+package com.ao.recipes.ui
 
 import androidx.compose.material3.Surface
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
@@ -31,14 +31,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
-import com.example.recipes.ui.navigation.RecipeNavigationActions
-import com.example.recipes.ui.navigation.RecipeNavigationWrapper
-import com.example.recipes.ui.navigation.Route
-import com.example.recipes.ui.utils.DevicePosture
-import com.example.recipes.ui.utils.RecipeType
-import com.example.recipes.ui.utils.NavigationType
-import com.example.recipes.ui.utils.isBookPosture
-import com.example.recipes.ui.utils.isSeparating
+import com.ao.recipes.ui.navigation.RecipeNavigationActions
+import com.ao.recipes.ui.navigation.RecipeNavigationWrapper
+import com.ao.recipes.ui.navigation.Route
+import com.ao.recipes.ui.utils.DevicePosture
+import com.ao.recipes.ui.utils.RecipeType
+import com.ao.recipes.ui.utils.NavigationType
+import com.ao.recipes.ui.utils.isBookPosture
+import com.ao.recipes.ui.utils.isSeparating
 
 private fun NavigationSuiteType.toRecipeNavType() = when (this) {
     NavigationSuiteType.NavigationBar -> NavigationType.BOTTOM_NAVIGATION

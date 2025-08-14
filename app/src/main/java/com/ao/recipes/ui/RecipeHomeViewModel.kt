@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui
+package com.ao.recipes.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipes.data.Recipe
-import com.example.recipes.data.RecipesRepository
-import com.example.recipes.data.RecipesRepositoryImpl
-import com.example.recipes.ui.utils.RecipeType
+import com.ao.recipes.data.Recipe
+import com.ao.recipes.data.RecipesRepository
+import com.ao.recipes.data.RecipesRepositoryImpl
+import com.ao.recipes.ui.utils.RecipeType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

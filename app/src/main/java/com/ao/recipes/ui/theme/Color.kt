@@ -1,4 +1,4 @@
-package com.example.recipes.ui.theme
+package com.ao.recipes.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF026B5D)

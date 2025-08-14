@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.recipes.data.local
+package com.ao.recipes.data.local
 
 import com.example.recipes.R
-import com.example.recipes.data.Recipe
-import com.example.recipes.data.RecipeType
+import com.ao.recipes.data.Recipe
+import com.ao.recipes.data.RecipeType
 
 /**
  * A static data store of [Recipe]s.

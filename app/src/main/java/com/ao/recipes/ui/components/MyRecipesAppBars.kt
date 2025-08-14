@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui.components
+package com.ao.recipes.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -53,7 +53,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.recipes.R
-import com.example.recipes.data.Recipe
+import com.ao.recipes.data.Recipe
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

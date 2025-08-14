@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui.navigation
+package com.ao.recipes.ui.navigation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -77,7 +77,7 @@ import androidx.window.core.layout.WindowHeightSizeClass
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.example.recipes.R
-import com.example.recipes.ui.utils.NavigationContentPosition
+import com.ao.recipes.ui.utils.NavigationContentPosition
 import kotlinx.coroutines.launch
 
 private fun WindowSizeClass.isCompact() =

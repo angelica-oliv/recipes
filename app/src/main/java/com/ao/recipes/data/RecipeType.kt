@@ -14,19 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.recipes.data
+package com.ao.recipes.data
 
-import com.example.recipes.data.local.LocalRecipesDataProvider
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-
-class RecipesRepositoryImpl : RecipesRepository {
-
-    override fun getAllRecipes(): Flow<List<Recipe>> = flow {
-        emit(LocalRecipesDataProvider.allRecipes)
-    }
-
-    override fun getRecipeFromId(id: Long): Flow<Recipe?> = flow {
-        LocalRecipesDataProvider.allRecipes.firstOrNull { it.id == id }
-    }
+/**
+ * An enum class to define different types of recipes or categories.
+ */
+enum class RecipeType {
+    DESERT, MAIN_COURSE, SALAD, SOUP, APPETIZER
 }

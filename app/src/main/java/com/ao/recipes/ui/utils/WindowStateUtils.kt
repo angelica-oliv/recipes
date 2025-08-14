@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui.utils
+package com.ao.recipes.ui.utils
 
 import android.graphics.Rect
 import androidx.window.layout.FoldingFeature

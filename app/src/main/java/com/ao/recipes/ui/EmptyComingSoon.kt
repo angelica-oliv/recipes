@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui
+package com.ao.recipes.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

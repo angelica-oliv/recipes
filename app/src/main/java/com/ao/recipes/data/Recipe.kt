@@ -14,11 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.recipes.data
+package com.ao.recipes.data
+
+import androidx.annotation.DrawableRes
 
 /**
- * An enum class to define different types of recipes or categories.
+ * A simple data class to represent a Recipe.
  */
-enum class RecipeType {
-    DESERT, MAIN_COURSE, SALAD, SOUP, APPETIZER
-}
+data class Recipe(
+    val id: Long,
+    val name: String,
+    val description: String = "",
+    val ingredients: String = "",
+    val steps: String = "",
+    var link: String = "",
+    @DrawableRes val picture: Int,
+    var isStarred: Boolean = false,
+    var type: RecipeType = RecipeType.MAIN_COURSE,
+)

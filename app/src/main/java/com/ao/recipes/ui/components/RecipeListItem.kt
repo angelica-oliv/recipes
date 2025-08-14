@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui.components
+package com.ao.recipes.ui.components
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -44,11 +43,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.semantics.selected
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.recipes.data.Recipe
+import com.ao.recipes.data.Recipe
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

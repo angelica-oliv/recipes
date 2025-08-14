@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.recipes.ui
+package com.ao.recipes.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -46,13 +46,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.DisplayFeature
 import com.example.recipes.R
-import com.example.recipes.data.Recipe
-import com.example.recipes.ui.components.RecipeDetailAppBar
-import com.example.recipes.ui.components.RecipeDockedSearchBar
-import com.example.recipes.ui.components.RecipeListItem
-import com.example.recipes.ui.components.RecipeDetailItem
-import com.example.recipes.ui.utils.RecipeType
-import com.example.recipes.ui.utils.NavigationType
+import com.ao.recipes.data.Recipe
+import com.ao.recipes.ui.components.RecipeDetailAppBar
+import com.ao.recipes.ui.components.RecipeDockedSearchBar
+import com.ao.recipes.ui.components.RecipeListItem
+import com.ao.recipes.ui.components.RecipeDetailItem
+import com.ao.recipes.ui.utils.RecipeType
+import com.ao.recipes.ui.utils.NavigationType
 import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
 import com.google.accompanist.adaptive.TwoPane
 

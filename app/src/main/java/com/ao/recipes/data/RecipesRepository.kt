@@ -16,12 +16,13 @@
 
 package com.ao.recipes.data
 
+import android.content.Context
 import kotlinx.coroutines.flow.Flow
 
 /**
  * An Interface contract to get all recipes info for a User.
  */
 interface RecipesRepository {
-    fun getAllRecipes(): Flow<List<Recipe>>
-    fun getRecipeFromId(id: Long): Flow<Recipe?>
+    fun getAllRecipes(context: Context): Flow<List<Recipe>>
+    fun getRecipeFromId(context: Context, id: Long): Flow<Recipe?>
 }

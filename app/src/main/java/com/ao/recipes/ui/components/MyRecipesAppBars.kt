@@ -16,6 +16,7 @@
 
 package com.ao.recipes.ui.components
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -50,9 +51,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.recipes.R
+import androidx.core.graphics.drawable.toBitmap
+import coil.imageLoader
+import coil.request.ImageRequest
+import com.ao.recipes.R
 import com.ao.recipes.data.Recipe
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,6 +86,18 @@ fun RecipeDockedSearchBar(
                 }
             )
         }
+    }
+
+    val context = LocalContext.current
+    var avatarBitmap by remember { mutableStateOf<Bitmap?>(null) }
+
+    LaunchedEffect(Unit) {
+        val request = ImageRequest.Builder(context)
+            .data(R.drawable.avatar)
+            .allowHardware(false)
+            .build()
+        val drawable = context.imageLoader.execute(request).drawable
+        avatarBitmap = drawable?.toBitmap()
     }
 
     DockedSearchBar(
@@ -117,7 +134,7 @@ fun RecipeDockedSearchBar(
                 },
                 trailingIcon = {
                     RecipeImage(
-                        drawableResource = R.drawable.avatar,
+                        bitmap = avatarBitmap, // Use the loaded Bitmap
                         description = stringResource(id = R.string.profile),
                         modifier = Modifier
                             .padding(12.dp)
@@ -142,7 +159,7 @@ fun RecipeDockedSearchBar(
                             supportingContent = { Text(recipe.description) },
                             leadingContent = {
                                 RecipeImage(
-                                    drawableResource = recipe.picture,
+                                    bitmap = recipe.picture, // recipe.picture is already a Bitmap
                                     description = stringResource(id = R.string.recipe_picture),
                                     modifier = Modifier
                                         .size(32.dp)

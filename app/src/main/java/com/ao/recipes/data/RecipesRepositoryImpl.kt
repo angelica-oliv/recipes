@@ -16,17 +16,18 @@
 
 package com.ao.recipes.data
 
+import android.content.Context
 import com.ao.recipes.data.local.LocalRecipesDataProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class RecipesRepositoryImpl : RecipesRepository {
 
-    override fun getAllRecipes(): Flow<List<Recipe>> = flow {
-        emit(LocalRecipesDataProvider.allRecipes)
+    override fun getAllRecipes(context: Context): Flow<List<Recipe>> = flow {
+        emit(LocalRecipesDataProvider.getAllRecipes(context))
     }
 
-    override fun getRecipeFromId(id: Long): Flow<Recipe?> = flow {
-        LocalRecipesDataProvider.allRecipes.firstOrNull { it.id == id }
+    override fun getRecipeFromId(context: Context, id: Long): Flow<Recipe?> = flow {
+        LocalRecipesDataProvider.getAllRecipes(context).firstOrNull { it.id == id }
     }
 }

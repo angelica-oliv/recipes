@@ -45,7 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.DisplayFeature
-import com.example.recipes.R
+import com.ao.recipes.R
 import com.ao.recipes.data.Recipe
 import com.ao.recipes.ui.components.RecipeDetailAppBar
 import com.ao.recipes.ui.components.RecipeDockedSearchBar
@@ -88,10 +88,16 @@ fun RecipeListScreen(
                 )
             },
             second = {
-                RecipeDetail(
-                    recipe = recipeHomeUIState.openedRecipe ?: recipeHomeUIState.recipes.first(),
-                    isFullScreen = false
-                )
+                val recipeToShow = recipeHomeUIState.openedRecipe ?: recipeHomeUIState.recipes.firstOrNull()
+                if (recipeToShow != null) {
+                    RecipeDetail(
+                        recipe = recipeToShow,
+                        isFullScreen = false
+                    )
+                } else {
+                    // Optionally, show a placeholder or empty content if no recipe is available
+                    // For now, this part will be empty, preventing the crash.
+                }
             },
             strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 16.dp),
             displayFeatures = displayFeatures

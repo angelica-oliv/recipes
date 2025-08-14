@@ -24,7 +24,7 @@ import androidx.compose.material.icons.outlined.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.example.recipes.R
+import com.ao.recipes.R
 import kotlinx.serialization.Serializable
 
 sealed interface Route {

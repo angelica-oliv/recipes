@@ -23,10 +23,10 @@ plugins {
 
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
-    namespace = "com.example.recipes"
+    namespace = "com.ao.recipes"
 
     defaultConfig {
-        applicationId = "com.example.recipes"
+        applicationId = "com.ao.recipes"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
@@ -121,6 +121,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.window)
+    implementation(libs.coil.compose) // Added Coil dependency
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.core)

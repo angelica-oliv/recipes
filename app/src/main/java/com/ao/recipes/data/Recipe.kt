@@ -16,6 +16,7 @@
 
 package com.ao.recipes.data
 
+import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
 
 /**
@@ -28,7 +29,7 @@ data class Recipe(
     val ingredients: String = "",
     val steps: String = "",
     var link: String = "",
-    @DrawableRes val picture: Int,
+    val picture: Bitmap?,
     var isStarred: Boolean = false,
     var type: RecipeType = RecipeType.MAIN_COURSE,
 )

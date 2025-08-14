@@ -16,6 +16,7 @@
 
 package com.ao.recipes.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ao.recipes.data.Recipe
@@ -34,13 +35,9 @@ class RecipeHomeViewModel(private val recipesRepository: RecipesRepository = Rec
     private val _uiState = MutableStateFlow(RecipeHomeUIState(loading = true))
     val uiState: StateFlow<RecipeHomeUIState> = _uiState
 
-    init {
-        observeRecipes()
-    }
-
-    private fun observeRecipes() {
+    fun initRecipes(context: Context) {
         viewModelScope.launch {
-            recipesRepository.getAllRecipes()
+            recipesRepository.getAllRecipes(context)
                 .catch { ex ->
                     _uiState.value = RecipeHomeUIState(error = ex.message)
                 }

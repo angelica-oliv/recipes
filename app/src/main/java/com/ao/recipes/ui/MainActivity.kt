@@ -25,11 +25,17 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ao.recipes.data.Recipe
 import com.ao.recipes.data.local.LocalRecipesDataProvider
 import com.ao.recipes.ui.theme.ContrastAwareRecipeTheme
 import com.google.accompanist.adaptive.calculateDisplayFeatures
@@ -43,6 +49,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
+        viewModel.initRecipes(context = this) // viewModel will handle calling getAllRecipes
         setContent {
             ContrastAwareRecipeTheme {
                 val windowSize = calculateWindowSizeClass(this)
@@ -69,9 +76,14 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun RecipeAppPreview() {
+    var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        recipes = LocalRecipesDataProvider.getAllRecipes(context)
+    }
     ContrastAwareRecipeTheme {
         RecipeApp(
-            recipeHomeUIState = RecipeHomeUIState(recipes = LocalRecipesDataProvider.allRecipes),
+            recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(400.dp, 900.dp)),
             displayFeatures = emptyList(),
         )
@@ -82,9 +94,14 @@ fun RecipeAppPreview() {
 @Preview(showBackground = true, widthDp = 700, heightDp = 500)
 @Composable
 fun RecipeAppPreviewTablet() {
+    var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        recipes = LocalRecipesDataProvider.getAllRecipes(context)
+    }
     ContrastAwareRecipeTheme {
         RecipeApp(
-            recipeHomeUIState = RecipeHomeUIState(recipes = LocalRecipesDataProvider.allRecipes),
+            recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(700.dp, 500.dp)),
             displayFeatures = emptyList(),
         )
@@ -95,9 +112,14 @@ fun RecipeAppPreviewTablet() {
 @Preview(showBackground = true, widthDp = 500, heightDp = 700)
 @Composable
 fun RecipeAppPreviewTabletPortrait() {
+    var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        recipes = LocalRecipesDataProvider.getAllRecipes(context)
+    }
     ContrastAwareRecipeTheme {
         RecipeApp(
-            recipeHomeUIState = RecipeHomeUIState(recipes = LocalRecipesDataProvider.allRecipes),
+            recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(500.dp, 700.dp)),
             displayFeatures = emptyList(),
         )
@@ -108,9 +130,14 @@ fun RecipeAppPreviewTabletPortrait() {
 @Preview(showBackground = true, widthDp = 1100, heightDp = 600)
 @Composable
 fun RecipeAppPreviewDesktop() {
+    var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        recipes = LocalRecipesDataProvider.getAllRecipes(context)
+    }
     ContrastAwareRecipeTheme {
         RecipeApp(
-            recipeHomeUIState = RecipeHomeUIState(recipes = LocalRecipesDataProvider.allRecipes),
+            recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(1100.dp, 600.dp)),
             displayFeatures = emptyList(),
         )
@@ -121,9 +148,14 @@ fun RecipeAppPreviewDesktop() {
 @Preview(showBackground = true, widthDp = 600, heightDp = 1100)
 @Composable
 fun RecipeAppPreviewDesktopPortrait() {
+    var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        recipes = LocalRecipesDataProvider.getAllRecipes(context)
+    }
     ContrastAwareRecipeTheme {
         RecipeApp(
-            recipeHomeUIState = RecipeHomeUIState(recipes = LocalRecipesDataProvider.allRecipes),
+            recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(600.dp, 1100.dp)),
             displayFeatures = emptyList(),
         )

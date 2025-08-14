@@ -76,7 +76,7 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.window.core.layout.WindowHeightSizeClass
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
-import com.example.recipes.R
+import com.ao.recipes.R
 import com.ao.recipes.ui.utils.NavigationContentPosition
 import kotlinx.coroutines.launch
 

@@ -1,33 +1,31 @@
-/*
- * Copyright 2022 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.ao.recipes.data.local
 
-import com.example.recipes.R
+import android.content.Context
+import android.graphics.Bitmap
+import androidx.core.graphics.drawable.toBitmap
+import coil.imageLoader
+import coil.request.ImageRequest
 import com.ao.recipes.data.Recipe
 import com.ao.recipes.data.RecipeType
+import androidx.core.graphics.createBitmap
+import com.ao.recipes.R
 
 /**
- * A static data store of [Recipe]s.
+ * A static data store of [Recipe]s that loads images as Bitmaps using Coil.
  */
-
 object LocalRecipesDataProvider {
 
-    val allRecipes = listOf(
-        Recipe (
+    private suspend fun loadImageAsBitmap(context: Context, @androidx.annotation.DrawableRes drawableResId: Int): Bitmap {
+        val request = ImageRequest.Builder(context)
+            .data(drawableResId)
+            .allowHardware(false) // Disable hardware bitmaps for wider compatibility if needed
+            .build()
+        val result = context.imageLoader.execute(request).drawable
+        return result?.toBitmap() ?: createBitmap(100, 100) // Fallback placeholder
+    }
+
+    suspend fun getAllRecipes(context: Context): List<Recipe> = listOf(
+        Recipe(
             id = 1,
             name = "Bolo de Cenoura",
             description = "Bolo de cenoura com cobertura de chocolate",
@@ -41,9 +39,9 @@ object LocalRecipesDataProvider {
                     "4. Adicione o fermento em pó e misture delicadamente.\n" +
                     "5. Despeje a massa na forma untada e leve ao forno por aproximadamente 40 minutos, ou até que esteja dourado e firme ao toque.\n",
             type = RecipeType.DESERT,
-            picture = R.drawable.bolo_cenoura,
+            picture = loadImageAsBitmap(context, R.drawable.bolo_cenoura),
         ),
-        Recipe (
+        Recipe(
             id = 2,
             name = "Brigadeiro",
             description = "Doce tradicional brasileiro",
@@ -56,7 +54,7 @@ object LocalRecipesDataProvider {
                     "4. Com as mãos untadas com manteiga, enrole o brigadeiro em pequenas bolinhas.\n" +
                     "5. Passe as bolinhas no granulado de chocolate e coloque em forminhas de papel.\n",
             type = RecipeType.DESERT,
-            picture = R.drawable.brigadeiro,
+            picture = loadImageAsBitmap(context, R.drawable.brigadeiro),
         ),
         Recipe (
             id = 3,
@@ -79,7 +77,7 @@ object LocalRecipesDataProvider {
                     "5. Adicione o feijão cozido (com o caldo), sal, pimenta e cheiro-verde. Cozinhe por mais 20-30 minutos para apurar os sabores.\n" +
                     "6. Sirva com arroz branco, couve refogada, farofa e rodelas de laranja.\n",
             type = RecipeType.MAIN_COURSE,
-            picture = R.drawable.feijoada,
+            picture = loadImageAsBitmap(context, R.drawable.feijoada),
         ),
         Recipe (
             id = 4,
@@ -99,7 +97,7 @@ object LocalRecipesDataProvider {
                     "4. Acrescente os queijos ralados e misture até obter uma massa homogênea.\n" +
                     "5. Faça bolinhas com a massa e coloque em uma assadeira untada ou forrada com papel manteiga. Asse por cerca de 20-25 minutos, ou até que os pães de queijo estejam dourados e crescidos.\n",
             type = RecipeType.APPETIZER,
-            picture = R.drawable.paoqueijo,
+            picture = loadImageAsBitmap(context, R.drawable.paoqueijo),
         ),
         Recipe (
             id = 5,
@@ -125,7 +123,7 @@ object LocalRecipesDataProvider {
                     "6. Tampe a panela e cozinhe em fogo médio por cerca de 15-20 minutos, até que o peixe esteja cozido.\n" +
                     "7. Sirva com arroz branco e pirão feito com o caldo da moqueca.\n",
             type = RecipeType.MAIN_COURSE,
-            picture = R.drawable.feijoada,
+            picture = loadImageAsBitmap(context, R.drawable.feijoada), // Assuming this was intended, or replace with specific image
         ),
         Recipe (
             id = 6,
@@ -154,7 +152,7 @@ object LocalRecipesDataProvider {
                     "5. Passe as coxinhas na farinha de trigo, depois nos ovos batidos e por fim na farinha de rosca.\n" +
                     "6. Frite em óleo quente até dourar. Escorra em papel toalha.\n",
             type = RecipeType.APPETIZER,
-            picture = R.drawable.paoqueijo,
+            picture = loadImageAsBitmap(context, R.drawable.paoqueijo), // Assuming this was intended, or replace with specific image
         ),
         Recipe (
             id = 7,
@@ -176,7 +174,7 @@ object LocalRecipesDataProvider {
                     "6. Por último, adicione a couve fatiada e cozinhe por apenas 2 minutos para manter a cor verde viva.\n" +
                     "7. Sirva quente, regado com um fio de azeite de oliva.\n",
             type = RecipeType.SOUP,
-            picture = R.drawable.feijoada,
+            picture = loadImageAsBitmap(context, R.drawable.feijoada), // Assuming this was intended, or replace with specific image
         ),
         Recipe (
             id = 8,
@@ -197,7 +195,7 @@ object LocalRecipesDataProvider {
                     "6. Deixe esfriar completamente e leve à geladeira por pelo menos 4 horas.\n" +
                     "7. Para desenformar, passe uma faca nas bordas e vire sobre um prato com borda.\n",
             type = RecipeType.DESERT,
-            picture = R.drawable.bolo_cenoura,
+            picture = loadImageAsBitmap(context, R.drawable.bolo_cenoura), // Assuming this was intended, or replace with specific image
         ),
         Recipe (
             id = 9,
@@ -218,7 +216,7 @@ object LocalRecipesDataProvider {
                     "4. Polvilhe com a salsinha picada.\n" +
                     "5. Deixe descansar na geladeira por pelo menos 30 minutos antes de servir para que os sabores se misturem.\n",
             type = RecipeType.SALAD,
-            picture = R.drawable.paoqueijo,
+            picture = loadImageAsBitmap(context, R.drawable.paoqueijo), // Assuming this was intended, or replace with specific image
         ),
         Recipe (
             id = 10,
@@ -244,7 +242,7 @@ object LocalRecipesDataProvider {
                     "7. Escorra em papel toalha.\n" +
                     "8. Abra os acarajés ao meio e recheie com camarão seco refogado, vatapá, caruru e pimenta a gosto.\n",
             type = RecipeType.APPETIZER,
-            picture = R.drawable.paoqueijo,
+            picture = loadImageAsBitmap(context, R.drawable.paoqueijo), // Assuming this was intended, or replace with specific image
         ),
         Recipe (
             id = 11,
@@ -267,7 +265,7 @@ object LocalRecipesDataProvider {
                     "6. Retire a canela em pau e os cravos.\n" +
                     "7. Sirva quente ou fria, polvilhada com canela em pó.\n",
             type = RecipeType.DESERT,
-            picture = R.drawable.brigadeiro,
+            picture = loadImageAsBitmap(context, R.drawable.brigadeiro), // Assuming this was intended, or replace with specific image
         ),
         Recipe (
             id = 12,
@@ -290,22 +288,32 @@ object LocalRecipesDataProvider {
                     "5. Ajuste o sal se necessário.\n" +
                     "6. Sirva com arroz branco e farinha d'água.\n",
             type = RecipeType.MAIN_COURSE,
-            picture = R.drawable.feijoada,
+            picture = loadImageAsBitmap(context, R.drawable.feijoada), // Assuming this was intended, or replace with specific image
         ),
     )
 
     /**
-     * Get an [Recipe] with the given [id].
+     * Get a [Recipe] with the given [id].
      */
-    fun get(id: Long): Recipe? {
-        return allRecipes.firstOrNull { it.id == id }
+    suspend fun get(context: Context, id: Long): Recipe? {
+        return getAllRecipes(context).firstOrNull { it.id == id }
     }
 
     /**
      * Create a new, blank [Recipe].
      */
-    fun create(): Recipe {
-        val newId = (allRecipes.maxOfOrNull { it.id } ?: 0) + 1
-        return Recipe(id = newId, name = "", description = "", ingredients = "", steps = "", type = RecipeType.MAIN_COURSE, picture = R.drawable.bolo_cenoura,)
+    suspend fun create(context: Context): Recipe {
+        val newId = (getAllRecipes(context).maxOfOrNull { it.id } ?: 0) + 1
+        // Using a default image for new recipes. Consider adding a specific placeholder drawable.
+        val defaultBitmap = loadImageAsBitmap(context, R.drawable.bolo_cenoura) 
+        return Recipe(
+            id = newId, 
+            name = "", 
+            description = "", 
+            ingredients = "", 
+            steps = "", 
+            type = RecipeType.MAIN_COURSE, 
+            picture = defaultBitmap,
+        )
     }
 }

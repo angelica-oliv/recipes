@@ -55,7 +55,7 @@ fun RecipeDetailItem(
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 RecipeImage(
-                    drawableResource = recipe.picture,
+                    bitmap = recipe.picture, // Changed from drawableResource to bitmap
                     description = recipe.name,
                 )
                 Column(

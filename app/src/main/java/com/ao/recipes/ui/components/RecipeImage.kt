@@ -16,26 +16,39 @@
 
 package com.ao.recipes.ui.components
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.ao.recipes.R // Import your R file
 
 @Composable
 fun RecipeImage(
-    drawableResource: Int,
+    bitmap: Bitmap?,
     description: String,
     modifier: Modifier = Modifier
 ) {
-    Image(
-        modifier = modifier
-            .size(40.dp)
-            .clip(CircleShape),
-        painter = painterResource(id = drawableResource),
-        contentDescription = description,
-    )
+    if (bitmap != null) {
+        Image(
+            modifier = modifier
+                .size(40.dp)
+                .clip(CircleShape),
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = description,
+        )
+    } else {
+        Image(
+            modifier = modifier
+                .size(40.dp)
+                .clip(CircleShape),
+            painter = painterResource(id = R.drawable.placeholder), // Placeholder drawable
+            contentDescription = description,
+        )
+    }
 }

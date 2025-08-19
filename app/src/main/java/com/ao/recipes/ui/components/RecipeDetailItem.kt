@@ -34,8 +34,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ao.recipes.data.Recipe
+import com.ao.recipes.data.RecipeType
 
 @Composable
 fun RecipeDetailItem(
@@ -53,11 +55,12 @@ fun RecipeDetailItem(
                 .fillMaxWidth()
                 .padding(20.dp)
         ) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                RecipeImage(
-                    bitmap = recipe.picture, // Changed from drawableResource to bitmap
-                    description = recipe.name,
-                )
+            RecipeImage(
+                bitmap = recipe.picture, // Changed from drawableResource to bitmap
+                description = recipe.name,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Row(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
                 Column(
                     modifier = Modifier
                         .weight(1f)
@@ -102,4 +105,21 @@ fun RecipeDetailItem(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun RecipeDetailItemPreview() {
+    val recipe = Recipe(
+        id = 1L,
+        name = "Spaghetti Bolognese",
+        description = "Classic Italian dish",
+        ingredients = "Pasta, minced meat, tomato sauce, onions, garlic, herbs",
+        steps = "1. Cook pasta. 2. Prepare Bolognese sauce. 3. Combine and serve.",
+        link = "https://example.com/spaghetti-bolognese",
+        picture = null,
+        isStarred = false,
+        type = RecipeType.MAIN_COURSE
+    )
+    RecipeDetailItem(recipe = recipe)
 }

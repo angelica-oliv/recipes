@@ -95,8 +95,10 @@ fun RecipeListScreen(
                         isFullScreen = false
                     )
                 } else {
-                    // Optionally, show a placeholder or empty content if no recipe is available
-                    // For now, this part will be empty, preventing the crash.
+                    // Show a placeholder or an empty state indication
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text("No recipe selected or available.")
+                    }
                 }
             },
             strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 16.dp),

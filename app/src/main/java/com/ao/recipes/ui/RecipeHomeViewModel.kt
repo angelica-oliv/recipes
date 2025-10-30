@@ -47,7 +47,7 @@ class RecipeHomeViewModel(private val recipesRepository: RecipesRepository = Rec
                      */
                     _uiState.value = RecipeHomeUIState(
                         recipes = recipes,
-                        openedRecipe = recipes.first()
+                        openedRecipe = recipes.firstOrNull()
                     )
                 }
         }
@@ -68,7 +68,7 @@ class RecipeHomeViewModel(private val recipesRepository: RecipesRepository = Rec
         _uiState.value = _uiState
             .value.copy(
                 isDetailOnlyOpen = false,
-                openedRecipe = _uiState.value.recipes.first()
+                openedRecipe = _uiState.value.recipes.firstOrNull()
             )
     }
 }

@@ -36,5 +36,17 @@
     <string name="search_recipes">Pesquisar receitas</string>
     <string name="no_item_found">Nenhum item encontrado</string>
     <string name="no_search_history">Sem histórico de pesquisa</string>
-    <string name="recipe_picture">Foto da receita</string>"
+    <string name="recipe_picture">Foto da receita</string>
+    <string name="no_recipe_selected">Nenhuma receita selecionada ou disponível.</string>
+
+    <string name="add_new_recipe">Adicionar Nova Receita</string>
+    <string name="recipe_name">Nome da Receita*</string>
+    <string name="description">Descrição</string>
+    <string name="ingredients">Ingredientes (um por linha)*</string>
+    <string name="steps">Passos (um por linha)*</string>
+    <string name="link">Link (Opcional)</string>
+    <string name="recipe_type">Tipo de Receita (ex: PRATO_PRINCIPAL, SOBREMESA)</string>
+    <string name="favorite">Favorito:</string>
+    <string name="save_recipe">Salvar Receita</string>
+    <string name="fill_with_gemini">Preencher com Gemini</string>
 </resources>

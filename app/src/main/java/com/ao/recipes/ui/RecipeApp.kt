@@ -31,6 +31,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
+import com.ao.recipes.ui.components.AddNewRecipeScreen
 import com.ao.recipes.ui.navigation.RecipeNavigationActions
 import com.ao.recipes.ui.navigation.RecipeNavigationWrapper
 import com.ao.recipes.ui.navigation.Route
@@ -135,7 +136,11 @@ private fun RecipeNavHost(
             )
         }
         composable<Route.NewRecipe> {
-            EmptyComingSoon()
+            AddNewRecipeScreen(
+                modifier = modifier,
+                onSaveRecipe = {},
+                onFillWithGemini = {},
+            )
         }
         composable<Route.Favorites> {
             EmptyComingSoon()

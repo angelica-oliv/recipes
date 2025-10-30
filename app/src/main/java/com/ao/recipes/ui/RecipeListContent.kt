@@ -97,7 +97,7 @@ fun RecipeListScreen(
                 } else {
                     // Show a placeholder or an empty state indication
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("No recipe selected or available.")
+                        Text(stringResource(R.string.no_recipe_selected))
                     }
                 }
             },
@@ -116,7 +116,7 @@ fun RecipeListScreen(
             // When we have bottom navigation we show FAB at the bottom end.
             if (navigationType == NavigationType.BOTTOM_NAVIGATION) {
                 ExtendedFloatingActionButton(
-                    text = { Text(text = stringResource(id = R.string.compose)) },
+                    text = { Text(text = stringResource(id = R.string.edit)) },
                     icon = { Icon(Icons.Default.Edit, stringResource(id = R.string.compose)) },
                     onClick = { /*TODO*/ },
                     modifier = Modifier
@@ -224,3 +224,4 @@ fun RecipeDetail(
         }
     }
 }
+

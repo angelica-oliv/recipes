@@ -152,7 +152,6 @@ fun RecipeNavigationWrapper(
                     )
                     NavigationSuiteType.NavigationRail -> RecipeNavigationRail(
                         currentDestination = currentDestination,
-                        navigationContentPosition = navContentPosition,
                         navigateToTopLevelDestination = navigateToTopLevelDestination,
                         onDrawerClicked = {
                             coroutineScope.launch {
@@ -176,7 +175,6 @@ fun RecipeNavigationWrapper(
 @Composable
 fun RecipeNavigationRail(
     currentDestination: NavDestination?,
-    navigationContentPosition: NavigationContentPosition,
     navigateToTopLevelDestination: (RecipeTopLevelDestination) -> Unit,
     onDrawerClicked: () -> Unit = {},
 ) {
@@ -207,7 +205,7 @@ fun RecipeNavigationRail(
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
-                    contentDescription = stringResource(id = R.string.compose),
+                    contentDescription = stringResource(id = R.string.edit),
                     modifier = Modifier.size(18.dp)
                 )
             }
@@ -297,11 +295,11 @@ fun PermanentNavigationDrawerContent(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Edit,
-                            contentDescription = stringResource(id = R.string.compose),
+                            contentDescription = stringResource(id = R.string.edit),
                             modifier = Modifier.size(24.dp)
                         )
                         Text(
-                            text = stringResource(id = R.string.compose),
+                            text = stringResource(id = R.string.edit),
                             modifier = Modifier.weight(1f),
                             textAlign = TextAlign.Center
                         )

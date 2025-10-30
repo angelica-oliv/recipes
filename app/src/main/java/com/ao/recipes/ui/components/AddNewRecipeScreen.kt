@@ -1,5 +1,6 @@
 package com.ao.recipes.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -8,8 +9,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import com.ao.recipes.R
 import com.ao.recipes.data.Recipe
 import com.ao.recipes.data.RecipeType
 
@@ -44,7 +48,7 @@ fun AddNewRecipeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "Add New Recipe", // This can be localized if needed
+                stringResource(R.string.add_new_recipe),
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(bottom = 24.dp)
             )
@@ -52,7 +56,7 @@ fun AddNewRecipeScreen(
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text("Recipe Name*") }, // Localize
+                label = { Text(stringResource(R.string.recipe_name)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
@@ -62,7 +66,7 @@ fun AddNewRecipeScreen(
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("Description") }, // Localize
+                label = { Text(stringResource(R.string.description)) },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 2,
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
@@ -72,7 +76,7 @@ fun AddNewRecipeScreen(
             OutlinedTextField(
                 value = ingredients,
                 onValueChange = { ingredients = it },
-                label = { Text("Ingredients (one per line)") }, // Localize
+                label = { Text(stringResource(R.string.ingredients)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 80.dp, max = 200.dp),
@@ -83,7 +87,7 @@ fun AddNewRecipeScreen(
             OutlinedTextField(
                 value = steps,
                 onValueChange = { steps = it },
-                label = { Text("Steps (one per line)") }, // Localize
+                label = { Text(stringResource(R.string.steps)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 100.dp, max = 300.dp),
@@ -94,7 +98,7 @@ fun AddNewRecipeScreen(
             OutlinedTextField(
                 value = link,
                 onValueChange = { link = it },
-                label = { Text("Link (Optional)") }, // Localize
+                label = { Text(stringResource(R.string.link)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
@@ -104,7 +108,7 @@ fun AddNewRecipeScreen(
             OutlinedTextField(
                 value = recipeTypeStr,
                 onValueChange = { recipeTypeStr = it },
-                label = { Text("Recipe Type (e.g., MAIN_COURSE, DESERT)") }, // Localize
+                label = { Text(stringResource(R.string.recipe_type)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
@@ -115,7 +119,7 @@ fun AddNewRecipeScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("Favorite:", style = MaterialTheme.typography.bodyLarge) // Localize
+                Text(stringResource(R.string.favorite), style = MaterialTheme.typography.bodyLarge)
                 Switch(
                     checked = isStarredState,
                     onCheckedChange = { isStarredState = it }
@@ -123,35 +127,15 @@ fun AddNewRecipeScreen(
             }
             Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = "Note: Image for the recipe (Bitmap) needs to be handled. The 'Save' button currently cannot provide this.", // Localize
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.error,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
             ) {
                 Button(
                     onClick = {
-                        // CRITICAL: The Recipe data class requires a non-nullable 'picture: Bitmap'.
-                        // This form does not currently collect or create a Bitmap.
-                        // To properly save, you need to:
-                        // 1. Modify Recipe to have 'picture: Bitmap?' (nullable).
-                        // OR
-                        // 2. Implement an image picker here and create/load a Bitmap.
-                        // OR
-                        // 3. Provide a default/placeholder Bitmap.
-
-                        // val placeholderBitmap = android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888) // Example placeholder
-
                         val recipeType = RecipeType.entries.firstOrNull { it.name.equals(recipeTypeStr, ignoreCase = true) }
                             ?: RecipeType.MAIN_COURSE
-                        
-                        // Example: Attempting to create a recipe (will fail without a real Bitmap)
-                        /*
+
                         try {
                             val newRecipe = Recipe(
                                 id = System.currentTimeMillis(), // Or generate ID elsewhere
@@ -160,28 +144,33 @@ fun AddNewRecipeScreen(
                                 ingredients = ingredients,
                                 steps = steps,
                                 link = link,
-                                picture = placeholderBitmap, // <<<< PROBLEM: Needs a real Bitmap instance
+                                picture = null,
                                 isStarred = isStarredState,
                                 type = recipeType
                             )
                             onSaveRecipe(newRecipe)
                         } catch (e: Exception) {
-                            // Log error or show message to user about the missing Bitmap
-                            println("Error creating Recipe: ${'$'}{e.message}. Bitmap is required.")
+                            // Log error o
+                            Log.e("AddRecipe","Error creating Recipe: ${'$'}{e.message}. Bitmap is required.", e)
                         }
-                        */
-                        println("Save button clicked. Recipe Name: $name. Bitmap handling is required to save.")
-                        // TODO: Implement actual save logic once Bitmap handling is decided.
                     },
-                    enabled = name.isNotBlank() // Basic validation: name should not be empty
+                    enabled = name.isNotBlank() && ingredients.isNotBlank() && steps.isNotBlank()
                 ) {
-                    Text("Save Recipe") // Localize
+                    Text(stringResource(R.string.save_recipe))
                 }
 
                 Button(onClick = onFillWithGemini) {
-                    Text("Fill with Gemini") // Localize
+                    Text(stringResource(R.string.fill_with_gemini))
                 }
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun AddNewRecipeScreenPreview() {
+    AddNewRecipeScreen(
+        onSaveRecipe = {},
+        onFillWithGemini = {})
 }

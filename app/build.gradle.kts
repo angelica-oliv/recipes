@@ -123,6 +123,10 @@ dependencies {
     implementation(libs.androidx.window)
     implementation(libs.coil.compose) // Added Coil dependency
 
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.runner)

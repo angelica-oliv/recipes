@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -53,6 +54,7 @@ fun RecipeApp(
     windowSize: WindowSizeClass,
     displayFeatures: List<DisplayFeature>,
     recipeHomeUIState: RecipeHomeUIState,
+    viewModel: RecipeHomeViewModel,
     closeDetailScreen: () -> Unit = {},
     navigateToDetail: (Long, RecipeType) -> Unit = { _, _ -> },
 ) {
@@ -104,6 +106,7 @@ fun RecipeApp(
                 navigationType = navSuiteType.toRecipeNavType(),
                 closeDetailScreen = closeDetailScreen,
                 navigateToDetail = navigateToDetail,
+                viewModel = viewModel,
             )
         }
     }
@@ -118,8 +121,10 @@ private fun RecipeNavHost(
     navigationType: NavigationType,
     closeDetailScreen: () -> Unit,
     navigateToDetail: (Long, RecipeType) -> Unit,
+    viewModel: RecipeHomeViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
     NavHost(
         modifier = modifier,
         navController = navController,
@@ -138,7 +143,11 @@ private fun RecipeNavHost(
         composable<Route.NewRecipe> {
             AddNewRecipeScreen(
                 modifier = modifier,
-                onSaveRecipe = {},
+                onSaveRecipe = { recipe ->
+                    viewModel.addRecipe(context, recipe)
+                    viewModel.setOpenedRecipe(recipe = recipe)
+                    navController.popBackStack()
+                },
                 onFillWithGemini = {},
             )
         }

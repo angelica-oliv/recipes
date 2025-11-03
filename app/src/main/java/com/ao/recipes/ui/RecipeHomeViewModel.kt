@@ -53,6 +53,12 @@ class RecipeHomeViewModel(private val recipesRepository: RecipesRepository = Rec
         }
     }
 
+    fun addRecipe(context: Context, recipe: Recipe) {
+        viewModelScope.launch {
+            recipesRepository.addRecipe(context, recipe)
+        }
+    }
+
     fun setOpenedRecipe(recipeId: Long, contentType: RecipeType) {
         /**
          * We only set isDetailOnlyOpen to true when it's only single pane layout
@@ -61,6 +67,12 @@ class RecipeHomeViewModel(private val recipesRepository: RecipesRepository = Rec
         _uiState.value = _uiState.value.copy(
             openedRecipe = recipe,
             isDetailOnlyOpen = contentType == RecipeType.SINGLE_PANE
+        )
+    }
+
+    fun setOpenedRecipe(recipe: Recipe) {
+        _uiState.value = _uiState.value.copy(
+            openedRecipe = recipe,
         )
     }
 

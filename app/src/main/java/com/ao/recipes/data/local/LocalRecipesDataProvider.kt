@@ -2,18 +2,22 @@ package com.ao.recipes.data.local
 
 import android.content.Context
 import android.graphics.Bitmap
+import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.toBitmap
 import coil.imageLoader
 import coil.request.ImageRequest
+import com.ao.recipes.R
 import com.ao.recipes.data.Recipe
 import com.ao.recipes.data.RecipeType
-import androidx.core.graphics.createBitmap
-import com.ao.recipes.R
 
 /**
- * A static data store of [Recipe]s that loads images as Bitmaps using Coil.
+ * A data store of [Recipe]s that loads images as Bitmaps using Coil.
+ * This object holds a mutable list of recipes in memory.
  */
 object LocalRecipesDataProvider {
+
+    private val recipes = mutableListOf<Recipe>()
+    private var isInitialized = false
 
     private suspend fun loadImageAsBitmap(context: Context, @androidx.annotation.DrawableRes drawableResId: Int): Bitmap {
         val request = ImageRequest.Builder(context)
@@ -24,7 +28,35 @@ object LocalRecipesDataProvider {
         return result?.toBitmap() ?: createBitmap(100, 100) // Fallback placeholder
     }
 
-    suspend fun getAllRecipes(context: Context): List<Recipe> = listOf(
+    private suspend fun initialize(context: Context) {
+        if (isInitialized) return
+        recipes.addAll(loadInitialRecipes(context))
+        isInitialized = true
+    }
+
+    suspend fun getAllRecipes(context: Context): List<Recipe> {
+        initialize(context)
+        return recipes
+    }
+
+    /**
+     * Adds a new recipe to the in-memory list.
+     * Note: This does not persist the recipe across app restarts.
+     */
+    suspend fun addRecipe(context: Context, recipe: Recipe) {
+        initialize(context)
+        recipes.add(recipe)
+    }
+
+    /**
+     * Get a [Recipe] with the given [id].
+     */
+    suspend fun get(context: Context, id: Long): Recipe? {
+        initialize(context)
+        return recipes.firstOrNull { it.id == id }
+    }
+
+    private suspend fun loadInitialRecipes(context: Context): List<Recipe> = listOf(
         Recipe(
             id = 1,
             name = "Bolo de Cenoura",
@@ -286,34 +318,9 @@ object LocalRecipesDataProvider {
                     "3. Corte todas as carnes em pedaços e refogue com alho e cebola.\n" +
                     "4. Adicione as folhas de mandioca já cozidas e continue o cozimento por mais 3 horas em fogo baixo.\n" +
                     "5. Ajuste o sal se necessário.\n" +
-                    "6. Sirva com arroz branco e farinha d'água.\n",
+                    "6. Sirva com arroz branco e farinha d\'água.\n",
             type = RecipeType.MAIN_COURSE,
             picture = loadImageAsBitmap(context, R.drawable.feijoada), // Assuming this was intended, or replace with specific image
         ),
     )
-
-    /**
-     * Get a [Recipe] with the given [id].
-     */
-    suspend fun get(context: Context, id: Long): Recipe? {
-        return getAllRecipes(context).firstOrNull { it.id == id }
-    }
-
-    /**
-     * Create a new, blank [Recipe].
-     */
-    suspend fun create(context: Context): Recipe {
-        val newId = (getAllRecipes(context).maxOfOrNull { it.id } ?: 0) + 1
-        // Using a default image for new recipes. Consider adding a specific placeholder drawable.
-        val defaultBitmap = loadImageAsBitmap(context, R.drawable.bolo_cenoura) 
-        return Recipe(
-            id = newId, 
-            name = "", 
-            description = "", 
-            ingredients = "", 
-            steps = "", 
-            type = RecipeType.MAIN_COURSE, 
-            picture = defaultBitmap,
-        )
-    }
 }

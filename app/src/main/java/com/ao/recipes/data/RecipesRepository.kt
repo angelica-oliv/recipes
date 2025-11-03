@@ -25,4 +25,5 @@ import kotlinx.coroutines.flow.Flow
 interface RecipesRepository {
     fun getAllRecipes(context: Context): Flow<List<Recipe>>
     fun getRecipeFromId(context: Context, id: Long): Flow<Recipe?>
+    suspend fun addRecipe(context: Context, recipe: Recipe)
 }

@@ -28,6 +28,10 @@ class RecipesRepositoryImpl : RecipesRepository {
     }
 
     override fun getRecipeFromId(context: Context, id: Long): Flow<Recipe?> = flow {
-        LocalRecipesDataProvider.getAllRecipes(context).firstOrNull { it.id == id }
+        emit(LocalRecipesDataProvider.get(context, id))
+    }
+
+    override suspend fun addRecipe(context: Context, recipe: Recipe) {
+        LocalRecipesDataProvider.addRecipe(context, recipe)
     }
 }

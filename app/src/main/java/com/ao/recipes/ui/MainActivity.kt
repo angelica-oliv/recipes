@@ -60,6 +60,7 @@ class MainActivity : ComponentActivity() {
                     windowSize = windowSize,
                     displayFeatures = displayFeatures,
                     recipeHomeUIState = uiState,
+                    viewModel = viewModel,
                     closeDetailScreen = {
                         viewModel.closeDetailScreen()
                     },
@@ -78,6 +79,7 @@ class MainActivity : ComponentActivity() {
 fun RecipeAppPreview() {
     var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
     val context = LocalContext.current
+    val viewModel = RecipeHomeViewModel()
     LaunchedEffect(Unit) {
         recipes = LocalRecipesDataProvider.getAllRecipes(context)
     }
@@ -86,6 +88,7 @@ fun RecipeAppPreview() {
             recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(400.dp, 900.dp)),
             displayFeatures = emptyList(),
+            viewModel = viewModel,
         )
     }
 }
@@ -96,6 +99,7 @@ fun RecipeAppPreview() {
 fun RecipeAppPreviewTablet() {
     var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
     val context = LocalContext.current
+    val viewModel = RecipeHomeViewModel()
     LaunchedEffect(Unit) {
         recipes = LocalRecipesDataProvider.getAllRecipes(context)
     }
@@ -104,6 +108,7 @@ fun RecipeAppPreviewTablet() {
             recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(700.dp, 500.dp)),
             displayFeatures = emptyList(),
+            viewModel = viewModel,
         )
     }
 }
@@ -114,6 +119,7 @@ fun RecipeAppPreviewTablet() {
 fun RecipeAppPreviewTabletPortrait() {
     var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
     val context = LocalContext.current
+    val viewModel = RecipeHomeViewModel()
     LaunchedEffect(Unit) {
         recipes = LocalRecipesDataProvider.getAllRecipes(context)
     }
@@ -122,6 +128,7 @@ fun RecipeAppPreviewTabletPortrait() {
             recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(500.dp, 700.dp)),
             displayFeatures = emptyList(),
+            viewModel = viewModel,
         )
     }
 }
@@ -132,6 +139,7 @@ fun RecipeAppPreviewTabletPortrait() {
 fun RecipeAppPreviewDesktop() {
     var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
     val context = LocalContext.current
+    val viewModel = RecipeHomeViewModel()
     LaunchedEffect(Unit) {
         recipes = LocalRecipesDataProvider.getAllRecipes(context)
     }
@@ -140,6 +148,7 @@ fun RecipeAppPreviewDesktop() {
             recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(1100.dp, 600.dp)),
             displayFeatures = emptyList(),
+            viewModel = viewModel,
         )
     }
 }
@@ -150,6 +159,7 @@ fun RecipeAppPreviewDesktop() {
 fun RecipeAppPreviewDesktopPortrait() {
     var recipes by remember { mutableStateOf<List<Recipe>>(emptyList()) }
     val context = LocalContext.current
+    val viewModel = RecipeHomeViewModel()
     LaunchedEffect(Unit) {
         recipes = LocalRecipesDataProvider.getAllRecipes(context)
     }
@@ -158,6 +168,7 @@ fun RecipeAppPreviewDesktopPortrait() {
             recipeHomeUIState = RecipeHomeUIState(recipes = recipes),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(600.dp, 1100.dp)),
             displayFeatures = emptyList(),
+            viewModel = viewModel,
         )
     }
 }

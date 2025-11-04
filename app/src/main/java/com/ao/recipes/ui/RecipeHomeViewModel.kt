@@ -22,7 +22,8 @@ import androidx.lifecycle.viewModelScope
 import com.ao.recipes.data.Recipe
 import com.ao.recipes.data.RecipesRepository
 import com.ao.recipes.data.RecipesRepositoryImpl
-import com.ao.recipes.ui.utils.RecipeType
+import com.ao.recipes.data.RecipeType
+import com.ao.recipes.ui.utils.RecipeType as RecipeUIType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -59,14 +60,28 @@ class RecipeHomeViewModel(private val recipesRepository: RecipesRepository = Rec
         }
     }
 
-    fun setOpenedRecipe(recipeId: Long, contentType: RecipeType) {
+    fun fillWithGemini() {
+        val geminiRecipe = Recipe(
+            id = 0, // ID can be 0 for a new recipe
+            name = "Pizza de Calabresa com Borda de Catupiry",
+            description = "Uma pizza clássica brasileira com um toque especial de cremosidade na borda.",
+            ingredients = "- 1 disco de massa de pizza\n- 1/2 xícara de molho de tomate\n- 200g de queijo mussarela ralado\n- 150g de linguiça calabresa fatiada\n- 1/2 cebola fatiada\n- Orégano a gosto\n- Azeitonas pretas a gosto\n- Catupiry (requeijão cremoso) para a borda",
+            steps = "1. Pré-aqueça o forno a 220°C.\n2. Abra a massa da pizza em uma superfície enfarinhada.\n3. Espalhe o Catupiry por toda a borda da massa e dobre-a para fechar.\n4. Espalhe o molho de tomate sobre a massa.\n5. Cubra com o queijo mussarela, a calabresa, a cebola e as azeitonas.\n6. Polvilhe com orégano.\n7. Leve ao forno por 15-20 minutos ou até a massa estar dourada e o queijo derretido.",
+            type = RecipeType.MAIN_COURSE,
+            isStarred = false,
+            picture = null // No image for now
+        )
+        _uiState.value = _uiState.value.copy(recipePreFilledAI = geminiRecipe)
+    }
+
+    fun setOpenedRecipe(recipeId: Long, contentType: RecipeUIType) {
         /**
          * We only set isDetailOnlyOpen to true when it's only single pane layout
          */
         val recipe = uiState.value.recipes.find { it.id == recipeId }
         _uiState.value = _uiState.value.copy(
             openedRecipe = recipe,
-            isDetailOnlyOpen = contentType == RecipeType.SINGLE_PANE
+            isDetailOnlyOpen = contentType == RecipeUIType.SINGLE_PANE
         )
     }
 
@@ -88,6 +103,7 @@ class RecipeHomeViewModel(private val recipesRepository: RecipesRepository = Rec
 data class RecipeHomeUIState(
     val recipes: List<Recipe> = emptyList(),
     val openedRecipe: Recipe? = null,
+    val recipePreFilledAI: Recipe? = null,
     val isDetailOnlyOpen: Boolean = false,
     val loading: Boolean = false,
     val error: String? = null

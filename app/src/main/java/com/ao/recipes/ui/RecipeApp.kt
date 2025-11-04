@@ -143,12 +143,15 @@ private fun RecipeNavHost(
         composable<Route.NewRecipe> {
             AddNewRecipeScreen(
                 modifier = modifier,
+                recipePreFilledAI = recipeHomeUIState.recipePreFilledAI,
                 onSaveRecipe = { recipe ->
                     viewModel.addRecipe(context, recipe)
                     viewModel.setOpenedRecipe(recipe = recipe)
                     navController.popBackStack()
                 },
-                onFillWithGemini = {},
+                onFillWithGemini = {
+                    viewModel.fillWithGemini()
+                },
             )
         }
         composable<Route.Favorites> {

@@ -149,8 +149,8 @@ private fun RecipeNavHost(
                     viewModel.setOpenedRecipe(recipe = recipe)
                     navController.popBackStack()
                 },
-                onFillWithGemini = {
-                    viewModel.fillWithGemini()
+                onFillWithGemini = { recipeName ->
+                    viewModel.fillWithGemini(recipeName)
                 },
             )
         }

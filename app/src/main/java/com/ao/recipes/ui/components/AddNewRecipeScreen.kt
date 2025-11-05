@@ -21,7 +21,7 @@ import com.ao.recipes.data.RecipeType
 @Composable
 fun AddNewRecipeScreen(
     onSaveRecipe: (Recipe) -> Unit,
-    onFillWithGemini: () -> Unit,
+    onFillWithGemini: (String) -> Unit,
     modifier: Modifier = Modifier,
     recipePreFilledAI: Recipe? = null,
 ) {
@@ -172,7 +172,10 @@ fun AddNewRecipeScreen(
                     Text(stringResource(R.string.save_recipe))
                 }
 
-                Button(onClick = onFillWithGemini) {
+                Button(
+                    onClick = { onFillWithGemini(name) },
+                    enabled = name.isNotBlank()
+                ) {
                     Text(stringResource(R.string.fill_with_gemini))
                 }
             }

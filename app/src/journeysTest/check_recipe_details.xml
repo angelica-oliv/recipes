@@ -1,0 +1,8 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<journey name="Check Recipe Details">
+    <description xml:space="preserve">A Journey that tests the click on recipe list and the details opening</description>
+    <actions xml:space="preserve">
+        <action>Verify if the recipe called "Bolo de cenoura" appears on the screen</action>
+    </actions>
+</journey>

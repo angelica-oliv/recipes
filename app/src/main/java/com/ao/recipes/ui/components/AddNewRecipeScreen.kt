@@ -39,7 +39,7 @@ fun AddNewRecipeScreen(
             description = it.description
             ingredients = it.ingredients
             steps = it.steps
-            link = it.link
+            link = it.link ?: ""
             recipeTypeStr = it.type.name
             isStarredState = it.isStarred
         }

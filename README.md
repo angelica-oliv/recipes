@@ -22,13 +22,10 @@ Key features:
 
 ### AI Integration
 The app uses artificial intelligence to:
-* Generate new recipe ideas based on available ingredients
-* Suggest modifications to existing recipes
-* Generate Pictures for given recipes
+* Generate new recipe ideas based on a name
 
 ### Material 3 Design
 Minhas Receitas implements Material 3 design principles with:
-* Dynamic color theming that adapts to your device's wallpaper (on Android 12+)
 * Responsive layouts for different screen sizes
 * Smooth animations and transitions
 
@@ -49,6 +46,23 @@ The app uses a repository pattern for data management:
 To try out this app, use the latest stable version of [Android Studio](https://developer.android.com/studio).
 You can clone this repository.
 
+### Firebase Setup
+
+1.  **Create a Firebase Project:**
+    *   In the [Firebase console](https://console.firebase.google.com/), click **Add project**, and follow the on-screen instructions to create a Firebase project.
+
+2.  **Register Your App:**
+    *   In the project overview page, click the **Android** icon to launch the setup workflow.
+    *   Enter the package name of the app: `com.ao.recipes`.
+    *   Click **Register app**.
+
+3.  **Add a Firebase Configuration File:**
+    *   Click **Download google-services.json** to obtain your Firebase Android config file.
+    *   Move the downloaded `google-services.json` file into the `app/` directory of your Android project.
+
+4.  **Enable the Gemini API:**
+    *   In the [Google AI Studio](https://aistudio.google.com/app/apikey), create an API key.
+    *   In the Firebase console, go to the **Build** > **Gemini API** page and click **Enable**.
 
 [compose]: https://developer.android.com/jetpack/compose
 [material3]: https://m3.material.io/

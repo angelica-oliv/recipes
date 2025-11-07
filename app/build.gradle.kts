@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -122,6 +123,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.window)
     implementation(libs.coil.compose) // Added Coil dependency
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.ai)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

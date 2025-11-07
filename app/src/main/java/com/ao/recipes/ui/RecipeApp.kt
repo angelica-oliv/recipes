@@ -16,11 +16,13 @@
 
 package com.ao.recipes.ui
 
+import android.widget.Toast
 import androidx.compose.material3.Surface
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -92,6 +94,14 @@ fun RecipeApp(
     }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+
+    val context = LocalContext.current
+    LaunchedEffect(recipeHomeUIState.error) {
+        recipeHomeUIState.error?.let {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            viewModel.errorShown()
+        }
+    }
 
     Surface {
         RecipeNavigationWrapper(

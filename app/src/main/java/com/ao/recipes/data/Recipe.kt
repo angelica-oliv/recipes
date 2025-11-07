@@ -17,19 +17,21 @@
 package com.ao.recipes.data
 
 import android.graphics.Bitmap
-import androidx.annotation.DrawableRes
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * A simple data class to represent a Recipe.
  */
+@Serializable
 data class Recipe(
-    val id: Long,
+    val id: Long = 0,
     val name: String,
     val description: String = "",
     val ingredients: String = "",
     val steps: String = "",
-    var link: String = "",
-    val picture: Bitmap?,
+    var link: String? = "",
+    @Transient val picture: Bitmap? = null,
     var isStarred: Boolean = false,
     var type: RecipeType = RecipeType.MAIN_COURSE,
 )

@@ -15,8 +15,8 @@ Key features:
 
 ## Screenshots
 
-<img src="screenshots/medium_and_large_display.png">
-<img src="screenshots/compact_medium_large_displays.png">
+<img src="screenshots/medium_and_large_display.png" alt="App screenshot on medium and large displays">
+<img src="screenshots/compact_medium_large_displays.png" alt="App screenshot on compact, medium, and large displays">
 
 ## Technical Features
 

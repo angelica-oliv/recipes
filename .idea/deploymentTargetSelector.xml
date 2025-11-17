@@ -11,6 +11,9 @@
       <SelectionState runConfigName="ReplyAppPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="check_recipe_detail.journey.xml (Check Recipe Detail)">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
